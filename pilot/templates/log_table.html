@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block headtitle %}{{title}} | {{ block.super }}{% endblock headtitle %}
+
+{% block title %}
+    <div id="group-dir-search" class="dir-search" role="search">
+        <h1 class="page-title">
+            {{title}}
+        </h1>		
+    </div><!-- #group-dir-search -->
+{% endblock title %}
+{% block content %}
+    <!--<form method='GET' action=''>
+        <input type='text' name='q' placeholder='Search Logs' />
+        <input type='submit' value='search' />
+    </form>-->
+    <H1>{{title}}</H1>
+    <div id="groups-dir-list" class="groups dir-list" style="width:100%">
+    <h1>Activities</h1>
+                    <a href="new" class="button" style="position:absolute;bottom:5px;right:5px;margin:0;padding:5px 3px;">Log Activity</a> 
+        <div id="pag-top" class="pagination">
+            <div class="pag-count" id="group-dir-count-top"></div>
+            <div class="pagination-links" id="group-dir-pag-top"></div>
+        </div>
+        <table>
+            <tr>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Outreach Family
+                </th>
+                <th>
+                    Method
+                </th>
+                <th>
+                    User
+                </th>
+                <th>
+                    Chapter
+                </th>
+                <th>
+                    Region
+                </th>   
+                <th>
+                    timestamp
+                </th>        
+                <th>
+                    Notes
+                </th>
+                <th>
+                    Resourse Sent
+                </th>
+            </tr>
+            {% for obj in instance_log %}
+            <tr>
+                <td>
+                    <a href="/activities/{{ obj.id }}">{{ obj.Activity_Date }}</a>
+                </td>
+                <td>
+                    <a href="/activities/{{ obj.id }}">{{ obj.Outreach_Family }}</a>
+                </td>
+                <td>
+                    <a href="/activities/{{ obj.id }}">{{ obj.Log_Method }}</a>
+                </td>
+                <td>
+                    <a href="/activities/{{ obj.id }}">{{ obj.Log_User }}</a>
+                </td>
+                <td>
+                    <a href="/activities/{{ obj.id }}">{{ obj.Log_Chapter }}</a>
+                </td>
+                <td>
+                    <a href="/activities/{{ obj.id }}">{{ obj.Log_Region }}</a>
+                </td>   
+                <td>
+                    <a href="/activities/{{ obj.id }}">{{ obj.timestamp }}</a>
+                </td>        
+                <td>
+                    <a href="/activities/{{ obj.id }}">{{ obj.Log_Notes }}</a>
+                </td> 
+                <td>
+                    <a href="/activities/{{ obj.id }}">{{ obj.JDRF_Resource_Sent }}</a>
+                </td> 
+            </tr>
+            {% endfor %}        
+        </table>
+    </div><!-- #groups-dir-list -->
+{% endblock content %}

@@ -1,0 +1,171 @@
+<html>
+    <head>
+ 
+
+        <link rel='stylesheet' id='dashicons-css'  href='http://typeonenation.org/wp-includes/css/dashicons.min.css?ver=4.2.4' type='text/css' media='all' />
+        <link rel='stylesheet' id='badges-css-css'  href='http://typeonenation.org/wp-content/plugins/t1n-badges/assets/css/badges.css?ver=0.4.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='buddyboss-wp-frontend-css'  href='http://typeonenation.org/wp-content/themes/t1n-parent/css/wordpress.css?ver=4.2.4' type='text/css' media='all' />
+        <link rel='stylesheet' id='buddyboss-bp-frontend-css'  href='http://typeonenation.org/wp-content/themes/t1n-parent/css/buddypress.css?ver=4.2.4' type='text/css' media='all' />
+        <link rel="stylesheet" type="text/css" href="http://typeonenation.org/wp-content/themes/typeonenation/assets/css/typeonenation.css">
+        <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6575652/709262/css/fonts.css">
+        <link rel='stylesheet' id='cloud-fonts-css'  href='http://cloud.typography.com/6575652/749262/css/fonts.css' type='text/css' media='all' /><link rel='stylesheet' id='buddyboss-child-custom-css'  href='http://typeonenation.org/wp-content/themes/typeonenation/assets/css/typeonenation.css?cb=0.1.5&#038;ver=4.2.4' type='text/css' media='all' />
+        <!--<script type='text/javascript' src='http://typeonenation.org/wp-content/themes/t1n-parent/js/jquery.1.10.2.min.js?ver=1.10.2'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/themes/typeonenation/assets/js/cookie.js?ver=4.2.4'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/themes/typeonenation/assets/js/modernizr.js?ver=4.2.4'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/themes/typeonenation/assets/js/fastclick.js?ver=4.2.4'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/themes/typeonenation/assets/js/front.js?ver=4.2.4'></script>
+        
+    -->
+    {% block extrastyle %}
+    {% endblock%}
+        <title>{% block headtitle %}Outrach Pilot{% endblock headtitle %}</title>
+    </head>
+    <body>
+        <header class="header clearfix" role="banner">
+            <div class="inset"><!--login-->
+                {% if not user.is_authenticated %}
+                <menu class="button-menu only--large -menu -loggedout">
+                    <li class="-login" id="login" data-section="login" data-expanded="true">
+                        <form action="{% url 'login' %}" method="post">{% csrf_token %}
+                            {% if next %}
+                            <input type="hidden" name="next" value="{{ next }}" />
+                            {% endif %}
+                            <p class="-field form-field form-field--text">
+                                <!--<label for="username" aria-hidden="false">Username</label> -->
+                                <input type="text" name="username" value="{{ username}}" placeholder="Username"/>
+                                <!--<input id="username" name="log" type="text" autocomplete="off" aria-label="Username">-->
+                            </p>
+                            <p class="-field form-field form-field--text">
+                                <!--<label for="password" aria-hidden="false">Password</label>-->
+                                <input type="password" name="password" value=""placeholder="Password"/>
+                                <!--<input id="password" name="pwd" type="password" autocomplete="off" aria-label="Password">-->
+                            </p>
+                            <p class="-field">
+                                <!-- this is from django <input type="submit" value="Log In" />-->
+                                <button class="btn" type="submit">Login</button>
+                            </p>
+                        </form>
+                    </li>
+                    <li data-section="login" data-expanded="false">
+                        <button class="btn" aria-controls="login" aria-expanded="false" data-controls="login">Login</button>
+                    </li>
+                    <!--<li data-expanded="true">
+                        <a class="btn btn--primary register-btn" href="#">Register</a>
+                    </li>-->
+                </menu>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <menu class="button-menu only--large -menu ">
+                    <li>
+                        <button class="btn" data-controls="login">Welcome back - {{user}}</button>
+                    </li>
+                    <li data-expanded="true">
+                        <a class="btn btn--primary register-btn" href="{% url 'logout' %}">Log out</a>
+                    </li>
+                    <li></li>
+                    <li data-expanded="true">
+                        <a class="btn btn--primary register-btn" href="{% url 'passwordreset' %}">Change Password</a>
+                    </li>
+                </menu>
+                {% endif %}
+            </div>
+            <!--Menu-->
+
+        </header>
+        <nav class="navigation">
+            <ul id="menu-new-main-menu" class="inset">
+                {% if not user.is_authenticated %}<li id="menu-item-118591" class="only--large -home menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-19 current_page_item menu-item-118591"><a href="{% url 'home' %}" aria-current="true">Home</a></li>{% endif %}
+                {% if user.is_authenticated %}<li id="menu-item-118593" class="only--large -home menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-19 current_page_item menu-item-118591"><a href="{% url 'mentees' %}">Families</a></li>{% endif %}
+                {% if request.user.is_staff %}<li id="menu-item-118594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-118594"><a href="{% url 'outreachvolunteer' %}">Outreach Volunteers</a></li>{% endif %}
+                {% if request.user.is_authenticated %}<li id="menu-item-118594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-118594"><a href="{% url 'activities' %}">Activities</a></li>{% endif %}-->
+                {% if request.user.is_staff %}<li id="menu-item-118594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-118594"><a href="{% url 'mentee_create' %}">New Family</a></li>{% endif %}
+                {% if request.user.is_authenticated %}<li id="menu-item-118594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-118594"><a href="{% url 'newactivity' %}">New Activity</a></li>{% endif %}-->
+                <!--<li id="menu-item-118607" class="t1n-resource menu-item menu-item-type-post_type menu-item-object-page menu-item-118607"><a href="http://typeonenation.org/resources/">Resources</a></li>
+                <li id="menu-item-118598" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-118598"><a title="TypeOneNation Events" href="/events/">Events</a></li>
+                <li id="menu-item-118599" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-118599"><a href="http://typeonenation.org/about-us/">About</a></li>-->
+            </ul>
+        </nav>
+    <body>
+        <div id="main-wrap">
+            <div id="inner-wrap">
+                <div id="page" class="hfeed site">
+                    <div id="main" class="wrapper">
+                        <div class="page-full-width">
+                            <main class="main" {% block mainpadding %}style="padding-top:0px;"{% endblock mainpadding %} >
+                                <div class="board inset inset--main">
+                                    <div class="panel thread">
+                                        {% block header %}
+                                        <header id="groups-header" class="groups-banner page-header clearfix">
+                                            {% block title %}
+                                            <div id="group-dir-search" class="dir-search" role="search">
+                                            {% block message %}
+                                                {% if messages %}
+                                                <div class="warning">
+                                                <ul class="messages">
+                                                    {% for message in messages %}
+                                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                                </div>
+                                                {% endif %}
+                                            {% endblock message %}
+                                                <h1 class="page-title">
+                                                    Outreach Pilot
+                                                </h1>		
+                                            </div><!-- #group-dir-search -->
+                                            <div class="group-parent">
+                                                <p>
+                                                    JDRF’s Outreach Program is the primary entry point into the organization, presenting programs and opportunities to the T1D community who will join us in our work to accelerate life-changing breakthroughs to cure, prevent and treat T1D and its complications.  With the help of trained and experienced volunteers, JDRF staff seeks to meet individuals with T1D and their families in their time of need order to build lasting relationships which will ultimately lead to their loyalty to JDRF’s mission. JDRF Outreach strategies have been evaluated and opportunities for growth were identified to better support chapters and branches in implementing an effective Outreach Program.  The JDRF Mentor Program is recognized as an area with great opportunity to strengthen the approach to nurture relationships with those new to JDRF.  
+                                                </p>
+                                            </div>
+                                            {% endblock title %}
+                                        </header>
+                                        {% endblock header %}
+                                        <div class="clearfix"></div>
+                                        <div class="entry-content">
+                                            <div id="buddypress">
+
+                                            {% block content %}
+                                                <H1>Please log in!</H1>
+                                                
+                                            {% endblock content %}
+                                            </div><!-- #buddypress -->
+                                        </div><!-- .entry-content -->
+                                    </div>
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                </div>                    
+                <footer id="colophon" role="contentinfo" style="transform: translateZ(0px);">
+                    <div class="footer-inner-top">
+                        <div class="footer-inner-bottom">
+                            <div class="footer-inner">
+                                <div id="footer-links">
+                                    <div class="footer-social">
+                            
+                                    </div>
+                                </div>
+
+                                <div id="footer-credits" class="last">
+                                    <p>Copyright 2016 <a href="http://www.jdrf.org/" target="_blank" title="JDRF">JDRF</a></span></p>
+                                </div>
+                            </div><!-- .footer-inner -->
+                        </div><!-- .footer-inner-bottom -->
+                    </div>
+                </footer>
+            </div>
+        </div>
+<!--        <link rel='stylesheet' id='wangguard-bp-css'  href='http://typeonenation.org/wp-content/plugins/wangguard/css/wangguard-bp.css?ver=1.6' type='text/css' media='all' />
+        <script type='text/javascript' src='http://typeonenation.org/wp-includes/js/admin-bar.min.js?ver=4.2.4'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/plugins/bbpress/templates/default/js/editor.js?ver=2.6-alpha-5215'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/plugins/member-posts/js/member-posts.js?ver=1.0'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/themes/t1n-parent/js/navigation.js?ver=1.0'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/themes/t1n-parent/js/jquery.touchSwipe.min.js?ver=1.0'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/themes/t1n-parent/js/idangerous.swiper.js?ver=1.9.2'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/themes/t1n-parent/js/jquery.fitvids.js?ver=1.0'></script>
+        <script type='text/javascript' src='http://typeonenation.org/wp-content/themes/t1n-parent/js/mobile-main.js?ver=3.0'></script>
+    -->
+    </body>
+</html>

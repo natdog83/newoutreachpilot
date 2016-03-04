@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block headtitle %}{{title}} | {{ block.super }}{% endblock headtitle %}
+
+{% block title %}
+    <div id="group-dir-search" class="dir-search" role="search">
+        <h1 class="page-title">
+            {{title}}
+        </h1>		
+    </div><!-- #group-dir-search -->
+{% endblock title %}
+{% block content %}
+
+    <H1>{{title}}</H1>
+    <div id="item-body" class="group-item-body">
+        <div id="bbpress-forums">
+            <h1>Outreach Volunteers</h1>
+
+        </div>
+            <article class="post post--topic" >
+            <div id="pag-top" class="pagination">
+            <div class="pag-count" id="group-dir-count-top"></div>
+            <div class="pagination-links" id="group-dir-pag-top">
+                <a href="/ov" >View as List</a>
+            </div>
+            </div>
+
+                <table>
+                    <tr>
+                        <th>
+                            Full Name
+                        </th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Phone
+                        </th>
+                        <th>
+                            Chapter
+                        </th>
+                        <th>
+                            Region
+                        </th>   
+                        <th>
+                            Type
+                        </th>        
+                        <th>
+                            Outreach Families
+                        </th>
+                        <th>
+                            Activities
+                        </th>
+                    </tr>
+                    {% for obj in object_list %}
+                    <tr>
+                        <td>
+                            <a href="/activities/{{ obj.id }}">{{ obj.User_Full_Name }}</a>
+                        </td>
+                        <td>
+                            <a href="/activities/{{ obj.id }}">{{ obj.User }}</a>
+                        </td>
+                        <td>
+                            <a href="/activities/{{ obj.id }}">{{ obj.User_Email }}</a>
+                        </td>
+                        <td>
+                            <a href="/activities/{{ obj.id }}">{{ obj.User_Phone }}</a>
+                        </td>
+                        <td>
+                            <a href="/activities/{{ obj.id }}">{{ obj.Chapter }}</a>
+                        </td>
+                        <td>
+                            <a href="/activities/{{ obj.id }}">{{ obj.Region}}</a>
+                        </td>   
+                        <td>
+                            <a href="/activities/{{ obj.id }}">{{ obj.Mentor_Type }}</a>
+                        </td>        
+                        <td>
+                            <a href="/activities/{{ obj.id }}"> {{ obj.num_mentees }}</a>
+                        </td> 
+                        <td>
+                            <a href="/activities/{{ obj.id }}"> {{ obj.num_logs }}</a>
+                        </td> 
+                    </tr>
+                    {% endfor %}        
+                </table>
+            </article>
+        </div>
+    </div><!-- #groups-dir-list -->
+    
+{% endblock content %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block headtitle %}{{title}} | {{ block.super }}{% endblock headtitle %}
+{% block mainpadding %} {% endblock mainpadding %}
+{% block header %}
+<header class="page-header">
+    <h1><a href="{{ obj.get_absolute_url }}">{{ instance.User_Full_Name }}</a></h1>
+    <div class="pag-count" id="group-dir-count-top">
+        Created: {{timestamp }} by: {{Created_By}} - Updated: {{ instance.updated }}
+    </div>
+    <h2>Outreach Volunteer: {{ instance.Mentor_Assigned }}</h2>
+    <div class="fivecol left">
+    <p>{% for obj in user_addon %}
+        First Name: {{ obj.first_name }}<br />
+        Last Name: {{ obj.last_name }}<br />
+        E-mail: {{ obj.email }}<br />
+        is staff:{{ obj.is_staff }}<br />
+        {% endfor %}
+    </p>
+    </div>
+    <div class="fivecol right">
+    <p>
+        Phone: {{ instance.User_Phone_Number }}<br />
+        Chapter: {{ instance.Chapter }}<br />
+        Region: {{ instance.Region }}<br />
+        Type: {{ instance.Mentor_Type }}<br />
+    </p>
+    </div>
+    <div class="tencol">
+    <p>
+       <strong> Notes:<br /> </strong>
+        {{ instance.Notes }}
+    </p>
+    <p>    
+        <!--<a href="edit/" class="button">Edit</a>    -->    
+    </p>
+	
+	<!--<p class="cta">test</p>-->
+    </div>
+</header>
+{% endblock header %}
+
+{% block title %}
+
+{% endblock title %}
+{% block content %}
+    <H1>{{title}}</H1>
+    <div id="groups-dir-list" class="groups dir-list" style="width:100%" >
+<!--         <form method='GET' action=''>
+            <input type='text' name='q' placeholder='Search Outreach Families' />
+            <input type='submit' value='search' />
+        </form> -->
+        <div id="pag-top" class="pagination">
+            <div class="pag-count" id="group-dir-count-top"></div>
+            <div class="pagination-links" id="group-dir-pag-top"></div>
+        </div>
+        <ul id="groups-list" class="item-list" >	
+            {% for obj in instance_log %}
+            <li>
+                <div class="item">
+                    <a href="/mentee/{{obj.id}}">
+                    <div class="item-title">{{ obj }}</div>
+                    </a>
+                    <div class="item-desc">Notes: {{ obj.Notes }}</div>
+                </div>
+                <div class="action">
+                    <div class="meta">
+                        {{ obj.Mentor_Assigned }} / {{ obj.num_mentee }} Activities
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div id="pag-bottom" class="pagination">
+           <!-- <div class="pag-count" id="group-dir-count-bottom"></div>
+            <div class="pagination-links" id="group-dir-pag-bottom">
+                <span class='page-numbers current'>1</span>
+            </div>-->
+        </div>
+    </div><!-- #groups-dir-list -->
+{% endblock content %}
