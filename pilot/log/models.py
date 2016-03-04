@@ -18,6 +18,7 @@ class log(models.Model):
     OWKICKOFF = 'One Walk Kickoff Information/Invitation'
     OWINFORMATION = 'One Walk information/Invitation'
     PREGNANCYTOOLKIT = 'Pregnancy Toolkit'
+    SOCIALMEDIA = "Social Media"
     SCHOOLADVISORYTOOLKIT = 'School Advisory Toolkit'
     T1DCAREKIT = 'T1D Care Kit'
     TEENTOOLKIT = 'Teen Toolkit'
@@ -28,7 +29,8 @@ class log(models.Model):
         (PHONE, 'Phone call'),
         (EMAIL, 'E-Mail'),
         (MEETING, 'In-Person Meeting'),
-        (USPS, 'USPS Mailing'),        
+        (SOCIALMEDIA, 'Social Media'),
+        (USPS, 'USPS Mailing'),
     ]
     JDRFRESOURCECHOICES = [
         (BAGOFHOPE, 'Bag of Hope'),
@@ -54,7 +56,6 @@ class log(models.Model):
     Log_Chapter = models.CharField(max_length=80, blank=True)
     Log_Region = models.CharField(max_length=80, blank=True)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-    
+
     def get_absolute_url(self):
-        return reverse('log_detail', kwargs={"id": self.id})   
-               
+        return reverse('log_detail', kwargs={"id": self.id})
