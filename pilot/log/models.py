@@ -21,6 +21,7 @@ class log(models.Model):
     SOCIALMEDIA = "Social Media"
     SCHOOLADVISORYTOOLKIT = 'School Advisory Toolkit'
     T1DCAREKIT = 'T1D Care Kit'
+    TEXTING = 'Text Message'
     TEENTOOLKIT = 'Teen Toolkit'
     TRIALNETBROCURE = 'TrialNet Brochure'
     TYPEONENATIONSUMMIT = 'TypeOneNation Summit Information/Invitation'
@@ -30,6 +31,7 @@ class log(models.Model):
         (EMAIL, 'E-Mail'),
         (MEETING, 'In-Person Meeting'),
         (SOCIALMEDIA, 'Social Media'),
+        (TEXTING, "Text Message"),
         (USPS, 'USPS Mailing'),
     ]
     JDRFRESOURCECHOICES = [
