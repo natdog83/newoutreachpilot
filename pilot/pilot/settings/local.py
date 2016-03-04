@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = '+6_xb%v(s+l^ah2ct2pk-225*i2zqv6v0+2n#kl9mx$(1xahvf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -125,10 +125,10 @@ USE_TZ = True
 
 STATIC_URL = 'http://nathanmccusker.com/images/jdrf/pilot/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static_in_prod", "our_root") 
+STATIC_ROOT = os.path.join(BASE_DIR, "static_in_prod", "our_root")
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static_in_prod", "our_static"),
-    #os.path.join(BASE_DIR, "static_in_env") 
+    #os.path.join(BASE_DIR, "static_in_env")
     '/opt/python/bundle/13/app/pilot/static_in_prod/our_root'
 ]

@@ -5,7 +5,7 @@
     <div id="group-dir-search" class="dir-search" role="search">
         <h1 class="page-title">
             {{title}}
-        </h1>		
+        </h1>
     </div><!-- #group-dir-search -->
 {% endblock title %}
 {% block content %}
@@ -36,7 +36,7 @@
                     <div class="item-meta"><span class="activity">Chapter: {{ obj.Chapter }}</span></div>
                     <div class="item-meta"><span class="activity">Region: {{ obj.Region }}</span></div>
                     <div class="item-meta"><span class="activity">Phone: {{ obj.User_Phone_Number }}</span></div>
-                    <div class="item-meta"><span class="activity">E-Mail: {{ obj.email }}</span></div>
+                    <div class="item-meta"><span class="activity">E-Mail: {{ obj.User.email }}</span></div>
                     <div class="item-meta"><span class="activity">Permision: {{ obj.Mentor_Type }}</span></div>
                     <!--<div class="item-desc">Mentor: {{ obj.Mentor_Assigned }}</div>-->
                 </div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <!--<a href="" class="button" style="position:absolute;bottom:5px;right:5px;margin:0;padding:5px 3px;">Edit</a> -->
-                
+
                 <div class="clear"></div>
             </li>
             {% endfor %}

@@ -72,7 +72,7 @@ def deprecate_current_app(func):
                 request.current_app = current_app
         return func(*args, **kwargs)
     return inner
-     
+
 @csrf_protect
 def login_user(request):
     if request.user.is_authenticated():
@@ -104,22 +104,22 @@ def login_user(request):
                         res_region =  request.session.get('Region', default=None)
                         res_perm =  request.session.get('Perm', default=None)
                     state = "You've been successfully logged in!"
-                    return HttpResponseRedirect('/mentee/') 
+                    return HttpResponseRedirect('/mentee/')
                 else:
                     messages.success(request, "Your account is not active, please contact the site admin.")
                     state = "Your account is not active, please contact the site admin."
             else:
                 messages.success(request, "Your username and/or password were incorrect.")
                 state = "Your username and/or password were incorrect."
-                
-            
-        
-        return render_to_response('base.html',{'state':state, 'username': username}, context_instance=RequestContext(request))    
+
+
+
+        return render_to_response('base.html',{'state':state, 'username': username}, context_instance=RequestContext(request))
 
 def logout_user(request):
     logout(request)
     messages.success(request, "You've been successfully logged out!")
-    return HttpResponseRedirect('/') 
+    return HttpResponseRedirect('/')
 
 @sensitive_post_parameters()
 @csrf_protect
@@ -154,7 +154,7 @@ def passwordreset(request,
         context.update(extra_context)
 
     return TemplateResponse(request, template_name, context)
-    
+
 @login_required
 @deprecate_current_app
 def password_change_done(request,
@@ -167,18 +167,18 @@ def password_change_done(request,
         context.update(extra_context)
 
     return TemplateResponse(request, template_name, context)
-    
+
     # template_name = 'register.html'
     # form_class = PasswordChangeForm
     # model = User
-    
+
     # def get_form(self, form_class):
         # return form_class(user=self.request.user)
-        
+
 
     # def get_object(self):
-        # return User.objects.get(username=self.request.user)        
-    
+        # return User.objects.get(username=self.request.user)
+
     # def get_success_url(self):
         # print "get_success_url"
         # print self.request.user
@@ -193,11 +193,11 @@ def password_change_done(request,
     # def form_invalid(self,form):
         # print "form_invalid"
         # print form.errors
-        # return super(PasswordChangeForm, self).form_invalid(form)           
-        
-       # return render_to_response('password_change_form.html')    
-    
-    
+        # return super(PasswordChangeForm, self).form_invalid(form)
+
+       # return render_to_response('password_change_form.html')
+
+
 def register_user(request):
     if request.method == 'POST':
         c = {}
@@ -207,16 +207,16 @@ def register_user(request):
             messages.success(request, "The account has been created!")
             #return render_to_response('base.html', args)
             return HttpResponseRedirect('/')
-            
+
     args = {}
     args.update(csrf(request))
-    
+
     args['form'] = MyRegistrationForm()
-    
+
     return render_to_response('register.html', args)
 
-    
-@login_required  
+
+@login_required
 def Mentor_List(request):
     if request.user.is_authenticated():
         res_user =  request.session.get('User', default=None)
@@ -226,44 +226,42 @@ def Mentor_List(request):
         queryset = UserProfile.objects.all()
         if str(res_perm) == "Volunteer":
             messages.success(request, "You aren't authorized to view this record. If you feel this is in error please contact your Regional staff.")
-            return render(request, "base.html")  
-        
+            return render(request, "base.html")
+
         elif str(res_perm) == "Chapter Staff":
-            queryset = UserProfile.objects.filter(Chapter=res_chapter)
-            for obj in UserProfile : 
-                num_mentees = Mentee.Mentor_Assigned.filter(User=User).count()
+            queryset = UserProfile.objects.filter(Chapter=res_chapter).annotate(num_logs=Count('log', distinct=True), num_mentees=Count('mentee', distinct=True))
             context = {
                 "object_list": queryset,
                 "title": "My Chapters Outreach Volunteers",
             }
             return render(request, "mentor_list.html",context)
-        
+
         elif str(res_perm) == "Regional Staff":
             all_logs = log.objects.all()[0]
-            queryset = UserProfile.objects.filter(Region=res_region).annotate(num_logs=Count('log'), num_mentees=Count('mentee'))
+            queryset = UserProfile.objects.filter(Region=res_region).annotate(num_logs=Count('log', distinct=True), num_mentees=Count('mentee', distinct=True))
             context = {
                 "object_list": queryset,
                 "title": "My Regions Outreach Volunteers"
             }
             return render(request, "mentor_list.html",context)
-            
+
         elif str(res_perm) == "National Staff":
-            queryset = UserProfile.objects.all()
+            queryset = UserProfile.objects.all().annotate(num_logs=Count('log', distinct=True), num_mentees=Count('mentee', distinct=True))
             context = {
                 "object_list": queryset,
                 "title": "All Outreach Volunteers"
-            }   
-            return render(request, "mentor_list.html",context) 
-        
+            }
+            return render(request, "mentor_list.html",context)
+
         else:
             messages.success(request, "You aren't authorized to view this record. If you feel this is in error please contact your chapter staff.")
             return render(request, "base.html")
     else:
         messages.success(request, "Please log in to view that page")
         return render(request, "base.html")
-        
-@login_required  
-def Mentor_Table(request): 
+
+@login_required
+def Mentor_Table(request):
     if request.user.is_authenticated():
         res_user =  request.session.get('User', default=None)
         res_chapter =  request.session.get('Chapter', default=None)
@@ -272,11 +270,11 @@ def Mentor_Table(request):
         queryset = UserProfile.objects.all()
         if str(res_perm) == "Volunteer":
             messages.success(request, "You aren't authorized to view this record. If you feel this is in error please contact your Regional staff.")
-            return render(request, "base.html")  
-        
+            return render(request, "base.html")
+
         elif str(res_perm) == "Chapter Staff":
             queryset = UserProfile.objects.filter(Chapter=res_chapter)
-            for obj in UserProfile : 
+            for obj in UserProfile :
                 num_mentees = Mentee.Mentor_Assigned.filter(User=User).count()
                 print queryset.values()
             context = {
@@ -284,7 +282,7 @@ def Mentor_Table(request):
                 "title": "My Chapters Outreach Volunteers",
             }
             return render(request, "mentor_table.html",context)
-        
+
         elif str(res_perm) == "Regional Staff":
             all_logs = log.objects.all()[0]
             queryset = UserProfile.objects.filter(Region=res_region).annotate(num_logs=Count('log'), num_mentees=Count('mentee'))
@@ -293,15 +291,15 @@ def Mentor_Table(request):
                 "title": "My Regions Outreach Volunteers"
             }
             return render(request, "mentor_table.html",context)
-            
+
         elif str(res_perm) == "National Staff":
             queryset = UserProfile.objects.filter(Mentor_Assigned=user)
             context = {
                 "object_list": queryset,
                 "title": "All Outreach Volunteers"
-            }   
-            return render(request, "mentor_table.html",context) 
-        
+            }
+            return render(request, "mentor_table.html",context)
+
         else:
             messages.success(request, "You aren't authorized to view this record. If you feel this is in error please contact your chapter staff.")
             return render(request, "base.html")
@@ -310,13 +308,13 @@ def Mentor_Table(request):
         return render(request, "base.html")
 
 
-@login_required        
+@login_required
 def mentor_detail(request, id=None):
     res_user =  request.session.get('User', default=None)
     res_chapter =  request.session.get('Chapter', default=None)
     res_region =  request.session.get('Region', default=None)
     res_perm =  request.session.get('Perm', default=None)
-    if request.user.is_authenticated():    
+    if request.user.is_authenticated():
         instance = get_object_or_404(UserProfile, id=id)
         upid=instance.User
         user_addon = auth.models.User.objects.filter(username=upid)
@@ -329,27 +327,27 @@ def mentor_detail(request, id=None):
         }
         if str(res_perm) == "Volunteer":
             if str(instance.Mentor_Assigned) == res_user:
-                return render(request, "mentor_detail.html",context)    
+                return render(request, "mentor_detail.html",context)
             else:
                 messages.success(request, "You aren't authorized to view this record. If you feel this is in error please contact your chapter staff.")
-                return render(request, "base.html")                        
+                return render(request, "base.html")
         elif str(res_perm) == "Chapter Staff":
             if str(instance.Chapter) == res_chapter:
                 return render(request, "mentor_detail.html",context)
             else:
                 messages.success(request, "You aren't authorized to view this record. If you feel this is in error please contact your Regional staff.")
-                return render(request, "base.html")                        
+                return render(request, "base.html")
         elif str(res_perm) == "Regional Staff":
             if str(instance.Region) == str(res_region):
-                return render(request, "mentor_detail.html",context)  
+                return render(request, "mentor_detail.html",context)
             else:
                 messages.success(request, "You aren't authorized to view this record. If you feel this is in error please contact your National staff.")
-                return render(request, "base.html")        
-        elif str(res_perm) == "National Staff":            
+                return render(request, "base.html")
+        elif str(res_perm) == "National Staff":
             return render(request, "mentor_detail.html",context)
-           
+
     else:
         context = {
             "title": "Please Log In"
         }
-        return render(request, "base.html",context)          
+        return render(request, "base.html",context)
