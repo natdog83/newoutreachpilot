@@ -20,6 +20,7 @@ class Mentee(models.Model):
         (FEMALE, 'Female',)
     ]
     CRM_Record_ID = models.CharField(max_length=80, blank=True)
+    CRM_Outreach_Request_ID = models.CharField(max_length=80, blank=True)
     First_Name = models.CharField(max_length=80)
     Last_Name = models.CharField(max_length=80, blank=True)
     Gender = models.CharField(max_length=80, choices=SEX, blank=True)
