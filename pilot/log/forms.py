@@ -15,8 +15,8 @@ class LogForm(forms.ModelForm):
     # res_perm =  UserProfile.objects.get(User=user).Mentor_Type
 
 
-    Activity_Date = forms.DateField(widget=forms.SelectDateWidget(empty_label="Nothing"))
-    
+    #Activity_Date = forms.DateField(widget=forms.SelectDateWidget(empty_label="Nothing"))
+
     class Meta:
         model = log
         exclude = [
@@ -28,7 +28,3 @@ class LogForm(forms.ModelForm):
         widgets = {
             'Log_Chapter': Select(),
         }
-
-            
-
-            

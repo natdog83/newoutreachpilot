@@ -3,30 +3,36 @@
 {% block mainpadding %} {% endblock mainpadding %}
 {% block header %}
 <header class="page-header">
-    <h1><a href="{{ obj.get_absolute_url }}">{{ instance.Name }}</a></h1>
+    <h1><a href="{{ obj.get_absolute_url }}">{{ instance.First_Name }} {{ instance.Last_Name }}</a></h1>
     <div class="pag-count" id="group-dir-count-top">
-        Created: {{timestamp }} by: {{Created_By}} - Updated: {{ instance.updated }}
+        Created: {{instance.timestamp }} - Updated: {{ instance.updated }} by: {{instance.Updated_By}}
     </div>
     <h2>Outreach Volunteer: {{ instance.Mentor_Assigned }}</h2>
     <div class="fivecol left">
     <p>
         E-mail: {{ instance.Email }}<br />
-        Phone: {{ instance.Phone_Number }}<br />
-        
-        Address: {{ instance.Address }}<br />
-        Chapter: {{ instance.Chapter }}<br />
-        Region: {{ instance.Region }}<br />
-        CRM Record ID: {{ obj.CRM_Record_ID }}<br />
+        Preferred Phone: {{ instance.Preferred_Phone }}<br />
+        Home Phone: {{ instance.Home_Number }}<br />
+        Mobile Phone: {{ instance.Mobile_Phone }}<br />
+        Business Phone: {{ instance.Business_Number }}<br />
+        Address: {{ instance.Mailing_Address_Line_1 }}<br />
+        Address 2: {{ instance.Mailing_Address_Line_2 }}<br />
+        Address 3: {{ instance.Mailing_Address_Line_3 }}<br />
+        City, State, Zip: {{ instance.City }}, {{ instance.State }} {{ instance.Zip }}<br />
+        Employer: {{instance.Employer }}<br />
     </p>
     </div>
     <div class="fivecol right">
     <p>
+        Chapter: {{ instance.Chapter }}<br />
+        Region: {{ instance.Region }}<br />
+        CRM Record ID: {{ obj.CRM_Record_ID }}<br />
         Child with T1D: {{  instance.Child_T1D_name }}<br />
         Gender: {{ instance.Child_Gender }}<br />
-        Age: {{ instance.Childs_Age }}<br />
+        Child DOB: {{ instance.Childs_DOB }}<br />
         Diagnosis Date: {{ instance.Diagnosis_Date }}<br />
-        Diagnosed at: {{ instance.Hospital_Endo }}<br />
-        School/Grade: {{ instance.School_Grade }}
+        Diagnosed at: {{ instance.Hospital }}/{{ instance.Endo }}<br />
+        School/Grade: {{ instance.School }}/{{ instance.Grade }}
     </p>
     </div>
     <div class="tencol">
@@ -34,10 +40,10 @@
        <strong> Notes:<br /> </strong>
         {{ instance.Notes }}
     </p>
-    <p>    
-        <a href="edit/" class="button">Edit</a>        
+    <p>
+        <a href="edit/" class="button">Edit</a>
     </p>
-	
+
 	<!--<p class="cta">test</p>-->
     </div>
 </header>
@@ -57,7 +63,7 @@
             <div class="pag-count" id="group-dir-count-top"></div>
             <div class="pagination-links" id="group-dir-pag-top"></div>
         </div>
-        <ul id="groups-list" class="item-list" >	
+        <ul id="groups-list" class="item-list" >
             {% for obj in instance_log %}
             <li>
                 <div class="item">

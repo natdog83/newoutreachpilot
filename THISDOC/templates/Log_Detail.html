@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block headtitle %}{{title}} | {{ block.super }}{% endblock headtitle %}
+{% block mainpadding %} {% endblock mainpadding %}
+{% block header %}
+<header class="page-header">
+    <h1><a href="">{{ instance.Log_Date }} {{ instance.Outreach_Family }}</a></h1>
+    <div class="pag-count" id="group-dir-count-top">
+        Created: {{instance.timestamp }} by: {{instance.Log_User}} 
+    </div>
+    <h2>Outreach Volunteer: {{ instance.Log_User }}</h2>
+    <div class="fivecol left">
+    <p>
+        Chapter: {{ instance.Log_Chapter }}<br />
+        Region: {{ instance.Log_Region }}<br />
+        Method: {{ instance.Log_Method}}
+    </p>
+    </div>
+
+    <div class="tencol">
+    <p>
+       <strong> Notes:<br /> </strong>
+        {{ instance.Log_Notes }}
+    </p>
+	 
+	<!--<p class="cta">test</p>-->
+    </div>
+</header>
+
+
+
+{% endblock header %}
+
+{% block title %}
+
+{% endblock title %}
+{% block content %}
+
+{% endblock content %}

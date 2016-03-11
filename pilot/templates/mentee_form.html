@@ -1,24 +1,60 @@
 {% extends "base.html" %}
+{% block extrastyle %} | {{ block.super }}
+{% endblock extrastyle %}
 {% block headtitle %}{{title}} | {{ block.super }}{% endblock headtitle %}
 {% block mainpadding %} {% endblock mainpadding %}
 {% block message %}{% endblock message %}
 {% block header %}
+<style>
+  .form-control{
+    width:100%;
+  }
+</style>
 <script>
-#id_Mentee_Notes {
-    width: 100%;
-    height: 200px;
-}
+$(function() {
+  $( "#id_Childs_DOB" ).datepicker();
+});
+$(function() {
+  $( "#id_Diagnosis_Date" ).datepicker();
+});
 </script>
+
 <header class="page-header">
     <H1>{{title}}</H1>
-    <form method='POST' action=''>{% csrf_token %}
-        <div class="form-group">
-            {{ form }}
-
-            </div>
-            <input type="submit" value="Submit" />
-        </div>
+    <div class="formfill">
+    <form method="post" action=''>{% csrf_token %}
+      {% load bootstrap %}
+      {{ form.CRM_Record_ID|bootstrap }}
+      {{ form.First_Name|bootstrap }}
+      {{ form.Last_Name|bootstrap }}
+      {{ form.Gender|bootstrap }}
+      {{ form.Mailing_Address_Line_1|bootstrap }}
+      {{ form.Mailing_Address_Line_2|bootstrap }}
+      {{ form.Mailing_Address_Line_3|bootstrap }}
+      {{ form.City|bootstrap }}
+      {{ form.State|bootstrap }}
+      {{ form.Zip|bootstrap }}
+      {{ form.Preferred_Phone|bootstrap }}
+      {{ form.Home_Number|bootstrap }}
+      {{ form.Business_Number|bootstrap }}
+      {{ form.Mobile_Phone|bootstrap }}
+      {{ form.Email|bootstrap }}
+      {{ form.Employer|bootstrap }}
+      {{ form.Has_Diabetes|bootstrap }}
+      {{ form.Child_T1D_name|bootstrap }}
+      {{ form.Childs_DOB|bootstrap }}
+      {{ form.Diagnosis_Date|bootstrap }}
+      {{ form.Hospital|bootstrap }}
+      {{ form.Endo|bootstrap }}
+      {{ form.School|bootstrap }}
+      {{ form.Grade|bootstrap }}
+      {{ form.Chapter|bootstrap }}
+      {{ form.Region|bootstrap }}
+      {{ form.Mentor_Assigned|bootstrap }}
+      {{ form.Notes|bootstrap }}
+      <button type="submit" class="btn btn-default">Submit</button>
     </form>
+  </div>
 </header>
 {% endblock header %}
 
@@ -26,5 +62,4 @@
 
 {% endblock title %}
 {% block content %}
-
 {% endblock content %}

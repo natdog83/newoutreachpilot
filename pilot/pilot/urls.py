@@ -32,9 +32,9 @@ urlpatterns = [
     url(r'^register/', register_user, name='register'),
     url(r'^login/', login_user, name='login'),
     url(r'^logout/', logout_user, name='logout'),
-    url(r'^ov/$', Mentor_List, name='outreachvolunteer'),    
-    url(r'^ov/table$', Mentor_Table, name='outreachvolunteertable'),   
-    url(r'^ov/(?P<id>\d+)/$', mentor_detail, name="mentor_detail"),    
+    url(r'^ov/$', Mentor_List, name='outreachvolunteer'),
+    url(r'^ov/table$', Mentor_Table, name='outreachvolunteertable'),
+    url(r'^ov/(?P<id>\d+)/$', mentor_detail, name="mentor_detail"),
     url(r'^mentee/$', mentee_list, name='mentees'),
     url(r'^mentee/(?P<id>\d+)/$', mentee_detail, name="mentee_detail"),
     url(r'^activities/(?P<id>\d+)/$', log_details, name="logdetails"),
@@ -42,8 +42,6 @@ urlpatterns = [
     url(r'^mentee/(?P<id>\d+)/edit/$', mentee_update, name="mentee_update"),
     url(r'^activities/$', logtable, name="activities"),
     url(r'^activities/new$', Log_Create_Form, name="newactivity"),   
-    
+
     url(r'^$', mentee_home, name='home'),
 ]
-
-

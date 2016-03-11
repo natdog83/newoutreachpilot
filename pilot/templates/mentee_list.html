@@ -5,7 +5,7 @@
     <div id="group-dir-search" class="dir-search" role="search">
         <h1 class="page-title">
             {{title}}
-        </h1>		
+        </h1>
     </div><!-- #group-dir-search -->
 {% endblock title %}
 {% block content %}
@@ -28,11 +28,14 @@
                 </div>-->
                 <div class="item">
                     <a href="{{ obj.get_absolute_url }}">
-                    <div class="item-title">{{ obj.Name }}</div>
+                    <div class="item-title">{{ obj.First_Name }} {{ obj.Last_Name }}</div>
                     </a>
                     <div class="item-meta"><span class="activity">Chapter: {{ obj.Chapter }}</span></div>
                     <div class="item-meta"><span class="activity">Region: {{ obj.Region }}</span></div>
-                    <div class="item-meta"><span class="activity">Phone: {{ obj.Phone_Number }}</span></div>
+                    <div class="item-meta"><span class="activity">Preferred Phone: {{ obj.Preferred_Phone }}</span></div>
+                    <div class="item-meta"><span class="activity">Home Phone: {{ obj.Home_Number }}</span></div>
+                    <div class="item-meta"><span class="activity">Business Phone: {{ obj.Business_Number }}</span></div>
+                    <div class="item-meta"><span class="activity">Mobile Phone: {{ obj.Mobile_Phone }}</span></div>
                     <div class="item-meta"><span class="activity">E-Mail: {{ obj.Email }}</span></div>
                     <div class="item-meta"><span class="activity">CRM Record ID: {{ obj.CRM_Record_ID }}</span></div>
                     <!--<div class="item-desc">Mentor: {{ obj.Mentor_Assigned }}</div>-->
@@ -43,7 +46,7 @@
                     </div>
                 </div>
                 <!--<a href="" class="button" style="position:absolute;bottom:5px;right:5px;margin:0;padding:5px 3px;">Log Activity</a> -->
-                
+
                 <div class="clear"></div>
             </li>
             {% endfor %}

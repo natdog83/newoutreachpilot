@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block headtitle %}{{title}} | {{ block.super }}{% endblock headtitle %}
+{% block title %}
+    <div id="group-dir-search" class="dir-search" role="search">
+        <h1 class="page-title">
+            {{title}}
+        </h1>		
+    </div><!-- #group-dir-search -->
+{% endblock title %}
+{% block content %}
+        <H1>{{title}}</H1>
+        <form action='/register/' method='post'> {% csrf_token %}
+            {{ form.as_p }}
+            <input type='submit' value='Register' />
+        </form>
+
+{% endblock content %}

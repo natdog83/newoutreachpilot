@@ -1,4 +1,4 @@
-from datetime import datetime 
+from datetime import datetime
 import json
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.contrib import messages
@@ -24,38 +24,38 @@ def logtable(request):
         res_perm =  request.session.get('Perm', default=None)
         mentor = UserProfile.objects.filter(User=user)
         if str(res_perm) == "Volunteer":
-            instance_log = log.objects.filter(Log_User=mentor)
+            instance_log = log.objects.filter(Log_User=mentor).order_by('-timestamp')
             context = {
                 "instance_log": instance_log,
                 "title": "My Activities",
 
             }
             return render(request, "log_table.html",context)
-        
+
         elif str(res_perm) == "Chapter Staff":
-            instance_log = log.objects.filter(Log_Chapter=res_chapter)
+            instance_log = log.objects.filter(Log_Chapter=res_chapter).order_by('-timestamp')
             context = {
                 "instance_log": instance_log,
                 "title": "My Chapters Activities"
             }
             return render(request, "log_table.html",context)
-        
+
         elif str(res_perm) == "Regional Staff":
-            instance_log = log.objects.filter(Log_Region=res_region)
+            instance_log = log.objects.filter(Log_Region=res_region).order_by('-timestamp')
             context = {
                 "instance_log": instance_log,
                 "title": "My Regions Activities"
             }
             return render(request, "log_table.html",context)
-            
+
         elif str(res_perm) == "National Staff":
-            instance_log = log.objects.all
+            instance_log = log.objects.all.order_by('-timestamp')
             context = {
                 "instance_log": instance_log,
                 "title": "All Activities"
-            }   
-            return render(request, "log_table.html",context) 
-        
+            }
+            return render(request, "log_table.html",context)
+
         else:
             messages.success(request, "You aren't authorized to view this record. If you feel this is in error please contact your chapter staff.")
             return render(request, "base.html")
@@ -69,8 +69,8 @@ def Log_Create_Form(request):
     res_user =  request.session.get('User')
     res_chapter =  request.session.get('Chapter')
     res_region =  request.session.get('Region')
-    res_perm =  request.session.get('Perm')    
-    form = LogForm(request.POST) 
+    res_perm =  request.session.get('Perm')
+    form = LogForm(request.POST)
     mentor = UserProfile.objects.filter(User=user)
     #currentuser = UserProfile.objects.filter(User=user).values
     #form = LogForm(request.POST, instance=request.user)
@@ -83,7 +83,7 @@ def Log_Create_Form(request):
     if str(res_perm) == "Regional Staff":
         form.fields['Outreach_Family'].queryset = Mentee.objects.filter(Region=res_region)
         form.fields['Log_User'].queryset = UserProfile.objects.filter(User=user)
- 
+
     context = {
         "form": form,
     }
@@ -99,23 +99,23 @@ def Log_Create_Form(request):
             messages.success(request or None, "Saved")
             #return render(request, "Log_Form.html", context)
             return HttpResponseRedirect('/activities/', instance.id)
-        
+
     else:
         messages.success(request or None, "Not Saved")
         return render(request, "Log_Form.html", context)
-            
+
 @login_required
 def log_details(request, id=None):
     res_user =  request.session.get('User', default=None)
     res_chapter =  request.session.get('Chapter', default=None)
     res_region =  request.session.get('Region', default=None)
     res_perm =  request.session.get('Perm', default=None)
-    if request.user.is_authenticated():    
+    if request.user.is_authenticated():
         instance = get_object_or_404(log, id=id)
         context = {
             "title": instance.Outreach_Family,
             "instance": instance,
-        }   
+        }
         return render(request, "Log_Detail.html", context)
     # if str(res_perm) == "Volunteer":
         # form.fields['Outreach_Family'].queryset = Mentee.objects.filter(Mentor_Assigned=res_user)
@@ -123,8 +123,8 @@ def log_details(request, id=None):
         # form.fields['Outreach_Family'].queryset = Mentee.objects.filter(Chapter=res_chapter)
     # if str(res_perm) == "Regional Staff":
         # form.fields['Outreach_Family'].queryset = Mentee.objects.filter(Region=res_region)
- 
-        
+
+
     # else:
         # messages.success(request or None, "Not Saved")
-        # return render(request, "Log_Form.html", context)        
+        # return render(request, "Log_Form.html", context)

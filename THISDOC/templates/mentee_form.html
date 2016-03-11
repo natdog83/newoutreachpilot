@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block headtitle %}{{title}} | {{ block.super }}{% endblock headtitle %}
+{% block mainpadding %} {% endblock mainpadding %}
+{% block message %}{% endblock message %}
+{% block header %}
+<script>
+#id_Mentee_Notes {
+    width: 100%;
+    height: 200px;
+}
+</script>
+<header class="page-header">
+    <H1>{{title}}</H1>
+    <form method='POST' action=''>{% csrf_token %}
+        <div class="form-group">
+            {{ form }}
+
+            </div>
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+</header>
+{% endblock header %}
+
+{% block title %}
+
+{% endblock title %}
+{% block content %}
+
+{% endblock content %}

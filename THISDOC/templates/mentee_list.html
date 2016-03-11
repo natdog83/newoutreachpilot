@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block headtitle %}{{title}} | {{ block.super }}{% endblock headtitle %}
+
+{% block title %}
+    <div id="group-dir-search" class="dir-search" role="search">
+        <h1 class="page-title">
+            {{title}}
+        </h1>		
+    </div><!-- #group-dir-search -->
+{% endblock title %}
+{% block content %}
+    <!--<form method='GET' action=''>
+        <input type='text' name='q' placeholder='Search Families' />
+        <input type='submit' value='search' />
+    </form>-->
+    <H1>{{title}}</H1>
+    <div id="groups-dir-list" style="width:100%" class="groups dir-list">
+    <h1>Newly Diagnosed Families</h1>
+        <div id="pag-top" class="pagination">
+            <div class="pag-count" id="group-dir-count-top"></div>
+            <div class="pagination-links" id="group-dir-pag-top"></div>
+        </div>
+        <ul id="groups-list" class="item-list" >
+            {% for obj in object_list %}
+            <li>
+                <!--<div class="item-avatar">
+                    <a href="{{ obj.get_absolute_url }}"><img src="http://typeonenation.org/wp-content/uploads/group-avatars/51/a62cb81fab9b7a6204796bfcc48bdeb7-bpfull.jpg" class="avatar group-51-avatar avatar-70 photo" width="70" height="70" alt="Group logo of Exercise &amp; Fitness" title='Exercise &amp; Fitness' />
+                </div>-->
+                <div class="item">
+                    <a href="{{ obj.get_absolute_url }}">
+                    <div class="item-title">{{ obj.Name }}</div>
+                    </a>
+                    <div class="item-meta"><span class="activity">Chapter: {{ obj.Chapter }}</span></div>
+                    <div class="item-meta"><span class="activity">Region: {{ obj.Region }}</span></div>
+                    <div class="item-meta"><span class="activity">Phone: {{ obj.Phone_Number }}</span></div>
+                    <div class="item-meta"><span class="activity">E-Mail: {{ obj.Email }}</span></div>
+                    <div class="item-meta"><span class="activity">CRM Record ID: {{ obj.CRM_Record_ID }}</span></div>
+                    <!--<div class="item-desc">Mentor: {{ obj.Mentor_Assigned }}</div>-->
+                </div>
+                <div class="action">
+                    <div class="meta">
+                        {{ obj.Mentor_Assigned }} / {{ obj.log__count }} Activities
+                    </div>
+                </div>
+                <!--<a href="" class="button" style="position:absolute;bottom:5px;right:5px;margin:0;padding:5px 3px;">Log Activity</a> -->
+                
+                <div class="clear"></div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div id="pag-bottom" class="pagination">
+            <div class="pag-count" id="group-dir-count-bottom"></div>
+            <!--<div class="pagination-links" id="group-dir-pag-bottom">
+                <span class='page-numbers current'>1</span>
+            </div>-->
+        </div>
+    </div><!-- #groups-dir-list -->
+{% endblock content %}
